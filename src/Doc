@@ -1,0 +1,91 @@
+import com.google.gson.Gson;
+import java.io.FileWriter;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class CurrencyConverter {
+
+    private static final String API_KEY = "tu_clave_de_API";
+    private static final String BASE_URL = "https://api.exchangerate-api.com/v4/latest/";
+
+    public static void main(String[] args) {
+        // Llamar al método para convertir monedas
+        convertirMonedas("USD", "EUR", 100);
+    }
+
+    public static void convertirMonedas(String monedaOrigen, String monedaDestino, double cantidad) {
+        try {
+            // Construir la URL de la solicitud
+            String url = BASE_URL + monedaOrigen;
+
+            // Crear un cliente HTTP
+            HttpClient client = HttpClient.newHttpClient();
+
+            // Crear la solicitud HTTP
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .build();
+
+            // Enviar la solicitud y recibir la respuesta
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            // Verificar si la respuesta fue exitosa (código de estado 200)
+            if (response.statusCode() == 200) {
+                // Convertir la respuesta JSON a un objeto CurrencyData usando Gson
+                Gson gson = new Gson();
+                CurrencyData currencyData = gson.fromJson(response.body(), CurrencyData.class);
+
+                // Obtener la tasa de conversión de moneda
+                double tasaConversion = currencyData.rates.get(monedaDestino);
+
+                // Calcular el monto convertido
+                double montoConvertido = cantidad * tasaConversion;
+
+                // Mostrar el resultado
+                System.out.println(cantidad + " " + monedaOrigen + " equivale a " + montoConvertido + " " + monedaDestino);
+
+                // Guardar el resultado en un archivo JSON
+                guardarResultadoEnJSON(monedaOrigen, monedaDestino, cantidad, montoConvertido);
+            } else {
+                System.out.println("Error al obtener las tasas de conversión.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private static void guardarResultadoEnJSON(String monedaOrigen, String monedaDestino, double cantidad, double montoConvertido) {
+        try (FileWriter fileWriter = new FileWriter("resultado_conversion.json")) {
+            // Crear un objeto JSON con los datos de la conversión
+            Gson gson = new Gson();
+            ConversionResult conversionResult = new ConversionResult(monedaOrigen, monedaDestino, cantidad, montoConvertido);
+
+            // Convertir el objeto a JSON y escribirlo en el archivo
+            gson.toJson(conversionResult, fileWriter);
+        } catch (Exception e) {
+            System.out.println("Error al guardar el resultado en el archivo JSON: " + e.getMessage());
+        }
+    }
+
+    // Clase para representar los datos de la conversión en JSON
+    static class ConversionResult {
+        String monedaOrigen;
+        String monedaDestino;
+        double cantidad;
+        double montoConvertido;
+
+        public ConversionResult(String monedaOrigen, String monedaDestino, double cantidad, double montoConvertido) {
+            this.monedaOrigen = monedaOrigen;
+            this.monedaDestino = monedaDestino;
+            this.cantidad = cantidad;
+            this.montoConvertido = montoConvertido;
+        }
+    }
+
+    // Clase para representar la respuesta JSON de la API
+    static class CurrencyData {
+        java.util.Map<String, Double> rates;
+    }
+}
