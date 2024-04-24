@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44ffdaef-2fbd-4556-a76b-eeb0b33fb760" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AluraChallenge2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CurrencyConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CurrencyData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Doc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SaveData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Totals.java" afterDir="false" />
-    </list>
+    <list default="true" id="44ffdaef-2fbd-4556-a76b-eeb0b33fb760" name="Changes" comment="Upload the Currency Converter to GitHub. First project from Java, Alura Challenge." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,7 +59,20 @@
       <option name="presentableId" value="Default" />
       <updated>1713633015008</updated>
     </task>
+    <task id="LOCAL-00001" summary="Upload the Currency Converter to GitHub. First project from Java, Alura Challenge.">
+      <option name="closed" value="true" />
+      <created>1713982987634</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1713982987666</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Upload the Currency Converter to GitHub. First project from Java, Alura Challenge." />
+    <option name="LAST_COMMIT_MESSAGE" value="Upload the Currency Converter to GitHub. First project from Java, Alura Challenge." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
